@@ -1,18 +1,138 @@
-# Angular
+# Electron Angular Starter
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+A modern desktop application starter template combining Electron, Angular 21, Material Design, and Tailwind CSS 4.
 
-## Development server
+## Features
+
+- ⚡ **Angular 21** - Latest Angular with standalone components and signals
+- 🎨 **Material Design 3** - Beautiful Material UI components
+- 🌈 **Tailwind CSS 4** - Utility-first CSS framework
+- 🖥️ **Electron** - Cross-platform desktop app
+- 📱 **Responsive** - Works on all screen sizes
+- 🔒 **TypeScript** - Type-safe code
+- 🎯 **Modern Tooling** - Hot reload, fast builds
+
+## Getting Started
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+```
+
+## Development
+
+### Web Development Mode
 
 To start a local development server, run:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+### Electron Development Mode
+
+Run the app as an Electron desktop application:
+
+```bash
+# Terminal 1: Start Angular dev server
+npm start
+
+# Terminal 2: Start Electron (in a separate terminal)
+npm run electron:dev
+```
+
+## Building for Production
+
+### Build Web App Only
+
+```bash
+npm run build
+```
+
+Output will be in `dist/angular/browser/`
+
+### Build Desktop Apps
+
+Build for your current platform:
+
+```bash
+npm run electron:build
+```
+
+Build for specific platforms:
+
+```bash
+# macOS (DMG and ZIP)
+npm run electron:build-mac
+
+# Windows (NSIS installer and portable)
+npm run electron:build-win
+
+# Linux (AppImage and DEB)
+npm run electron:build-linux
+```
+
+Built applications will be in the `release/` directory.
+
+## Project Structure
+
+```
+electron-angular/
+├── src/
+│   ├── app/
+│   │   ├── home/          # Landing page
+│   │   ├── examples/      # Component examples
+│   │   ├── login/         # Login page
+│   │   └── signup/        # Signup page
+│   ├── styles.scss        # Global styles
+│   └── index.html         # Main HTML
+├── public/
+│   └── assets/
+│       └── images/        # Application icons
+├── electron-main.js       # Electron main process
+├── preload.js            # Electron preload script
+└── package.json          # Dependencies and scripts
+```
+
+## Available Scripts
+
+- `npm start` - Start Angular dev server
+- `npm run build` - Build Angular app for production
+- `npm test` - Run tests
+- `npm run electron` - Run Electron (requires built Angular app)
+- `npm run electron:dev` - Run Electron in development mode
+- `npm run electron:build` - Build desktop app for current platform
+- `npm run electron:build-mac` - Build for macOS
+- `npm run electron:build-win` - Build for Windows
+- `npm run electron:build-linux` - Build for Linux
+
+## Technologies
+
+- [Angular 21](https://angular.dev) - Web framework
+- [Electron](https://www.electronjs.org/) - Desktop framework
+- [Material Design](https://material.angular.io/) - UI components
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+- [TypeScript](https://www.typescriptlang.org/) - Programming language
+
+## Building Icons
+
+The application icon is located at **`public/assets/images/logo1.png`**
+
+Electron Builder automatically converts this PNG file to the appropriate format for each platform (ICNS for macOS, ICO for Windows, PNG for Linux).
+
+### Icon Requirements:
+- **Minimum size**: 512x512 pixels
+- **Recommended size**: 1024x1024 pixels  
+- **Format**: PNG with transparency
+- **Aspect ratio**: Square (1:1)
+
+To use a different icon, simply replace `public/assets/images/logo1.png` with your new icon file and rebuild.
+
+## Code Scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
@@ -20,40 +140,22 @@ Angular CLI includes powerful code scaffolding tools. To generate a new componen
 ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Running Tests
+
+To execute unit tests with Vitest:
 
 ```bash
-ng generate --help
+npm test
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular CLI Documentation](https://angular.dev/tools/cli)
+- [Electron Documentation](https://www.electronjs.org/docs/latest)
+- [Material Design Guidelines](https://m3.material.io/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+
+## License
+
+MIT
+

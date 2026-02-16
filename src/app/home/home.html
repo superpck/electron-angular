@@ -1,0 +1,207 @@
+<div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+  <!-- Header -->
+  <mat-toolbar class="!bg-white/80 backdrop-blur-lg shadow-sm fixed top-0 left-0 right-0 z-50">
+    <div class="container mx-auto flex items-center justify-between px-4">
+      <div class="flex items-center space-x-3">
+        <mat-icon class="text-indigo-600">rocket_launch</mat-icon>
+        <span class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          Electron Starter
+        </span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button mat-button routerLink="/examples">Examples</button>
+        <button mat-button>Docs</button>
+        <button mat-raised-button color="primary" routerLink="/login">Sign In</button>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center space-y-8 animate-fade-in">
+        <div class="inline-flex items-center space-x-2 bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-semibold">
+          <mat-icon class="!w-4 !h-4 text-base">auto_awesome</mat-icon>
+          <span>Modern Desktop App Starter</span>
+        </div>
+        
+        <h1 class="text-6xl md:text-7xl font-bold">
+          <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Build Amazing
+          </span>
+          <br />
+          <span class="text-gray-900">Desktop Apps</span>
+        </h1>
+        
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          The ultimate starter template combining Electron, Angular 21, Material Design,
+          and Tailwind CSS 4 for creating beautiful cross-platform desktop applications.
+        </p>
+        
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <button mat-flat-button color="primary" routerLink="/signup" class="!px-8 !py-6 !text-lg">
+            <mat-icon class="mr-2">rocket_launch</mat-icon>
+            Get Started
+          </button>
+          <button mat-flat-button color="accent" routerLink="/examples" class="!px-8 !py-6 !text-lg">
+            <mat-icon class="mr-2">science</mat-icon>
+            View Examples
+          </button>
+          <button mat-stroked-button class="!px-8 !py-6 !text-lg">
+            <mat-icon class="mr-2">play_arrow</mat-icon>
+            View Demo
+          </button>
+        </div>
+        
+        <div class="flex items-center justify-center gap-3 pt-8">
+          <mat-chip-set>
+            <mat-chip>Angular 21</mat-chip>
+            <mat-chip>Electron</mat-chip>
+            <mat-chip>Material 3</mat-chip>
+            <mat-chip>Tailwind 4</mat-chip>
+            <mat-chip>TypeScript</mat-chip>
+          </mat-chip-set>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 px-4 bg-white/50">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2>
+        <p class="text-lg text-gray-600">Packed with modern tools and best practices</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (feature of features(); track feature.title) {
+          <mat-card class="!transition-all !duration-300 hover:!shadow-2xl hover:!-translate-y-2 !border-0 !bg-gradient-to-br !from-white !to-gray-50">
+            <mat-card-content class="!p-6">
+              <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                <mat-icon class="!text-white !w-8 !h-8 !text-3xl">{{ feature.icon }}</mat-icon>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{{ feature.title }}</h3>
+              <p class="text-gray-600 leading-relaxed">{{ feature.description }}</p>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Signup Section -->
+  <section class="py-20 px-4 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Get Started Today</h2>
+        <p class="text-xl text-gray-600">Join thousands of developers building amazing desktop apps</p>
+      </div>
+
+      <mat-card class="!shadow-2xl !max-w-2xl !mx-auto">
+        <mat-card-content class="!p-8">
+          <form [formGroup]="signupForm" (ngSubmit)="onQuickSignup()" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-4">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Full Name</mat-label>
+                <input 
+                  matInput 
+                  formControlName="name"
+                  placeholder="John Doe"
+                  autocomplete="name"
+                >
+                <mat-icon matPrefix class="text-indigo-600">person</mat-icon>
+                @if (signupForm.get('name')?.invalid && signupForm.get('name')?.touched) {
+                  <mat-error>Name is required</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Email Address</mat-label>
+                <input 
+                  matInput 
+                  type="email"
+                  formControlName="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                >
+                <mat-icon matPrefix class="text-indigo-600">email</mat-icon>
+                @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+                  <mat-error>
+                    @if (signupForm.get('email')?.hasError('required')) {
+                      Email is required
+                    } @else if (signupForm.get('email')?.hasError('email')) {
+                      Invalid email address
+                    }
+                  </mat-error>
+                }
+              </mat-form-field>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <button 
+                mat-flat-button 
+                color="primary" 
+                type="submit"
+                [disabled]="signupForm.invalid"
+                class="!px-10 !py-6 !text-lg !font-semibold !shadow-lg w-full sm:w-auto"
+              >
+                <mat-icon class="mr-2">rocket_launch</mat-icon>
+                Sign Up Free
+              </button>
+              <span class="text-sm text-gray-500">
+                Already have an account?
+                <a routerLink="/login" class="text-indigo-600 hover:text-indigo-700 font-medium ml-1">
+                  Sign in
+                </a>
+              </span>
+            </div>
+
+            <p class="text-xs text-center text-gray-500 mt-4">
+              By signing up, you agree to our 
+              <a href="#" class="text-indigo-600 hover:text-indigo-700">Terms of Service</a>
+              and 
+              <a href="#" class="text-indigo-600 hover:text-indigo-700">Privacy Policy</a>
+            </p>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Features Grid -->
+      <div class="grid md:grid-cols-3 gap-6 mt-16">
+        <div class="text-center p-6">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl mb-4 shadow-lg">
+            <mat-icon class="!text-white !w-8 !h-8 !text-3xl">flash_on</mat-icon>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Instant Setup</h3>
+          <p class="text-gray-600 text-sm">Get started in minutes with our pre-configured starter</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl mb-4 shadow-lg">
+            <mat-icon class="!text-white !w-8 !h-8 !text-3xl">cloud_done</mat-icon>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Cloud Ready</h3>
+          <p class="text-gray-600 text-sm">Deploy anywhere with built-in cloud support</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-4 shadow-lg">
+            <mat-icon class="!text-white !w-8 !h-8 !text-3xl">support_agent</mat-icon>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">24/7 Support</h3>
+          <p class="text-gray-600 text-sm">Community support and comprehensive documentation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 px-4 bg-gray-900 text-white">
+    <div class="container mx-auto max-w-6xl text-center">
+      <p class="text-gray-400">
+        Built with ❤️ using Angular, Electron, Material Design, and Tailwind CSS
+      </p>
+    </div>
+  </footer>
+</div>

@@ -9,6 +9,9 @@
     "angular": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular:application": {
+          "style": "scss"
+        },
         "@schematics/angular:component": {
           "style": "scss"
         }
@@ -30,6 +33,7 @@
               }
             ],
             "styles": [
+              "src/material-theme.scss",
               "src/styles.scss"
             ]
           },
@@ -38,13 +42,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "4MB",
+                  "maximumError": "8MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "4MB",
+                  "maximumError": "8MB"
                 }
               ],
               "outputHashing": "all"

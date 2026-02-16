@@ -1,0 +1,181 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <!-- Logo/Brand Section -->
+    <div class="text-center mb-8 animate-fade-in">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-2xl mb-4">
+        <mat-icon class="!w-12 !h-12 !text-5xl text-blue-600">person_add</mat-icon>
+      </div>
+      <h1 class="text-4xl font-bold text-white mb-2">Create Account</h1>
+      <p class="text-blue-100">Sign up to get started</p>
+    </div>
+
+    <!-- Signup Card -->
+    <mat-card class="!shadow-2xl !rounded-2xl overflow-hidden">
+      <mat-card-content class="!p-8">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-5">
+          <!-- Name Field -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Full Name</mat-label>
+            <input 
+              matInput 
+              type="text" 
+              formControlName="name"
+              placeholder="John Doe"
+              autocomplete="name"
+            >
+            <mat-icon matPrefix class="text-gray-400">person</mat-icon>
+            @if (signupForm.get('name')?.invalid && signupForm.get('name')?.touched) {
+              <mat-error>{{ getNameError() }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Email Field -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email Address</mat-label>
+            <input 
+              matInput 
+              type="email" 
+              formControlName="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+            >
+            <mat-icon matPrefix class="text-gray-400">email</mat-icon>
+            @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+              <mat-error>{{ getEmailError() }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Password Field -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Password</mat-label>
+            <input 
+              matInput 
+              [type]="hidePassword() ? 'password' : 'text'"
+              formControlName="password"
+              placeholder="At least 8 characters"
+              autocomplete="new-password"
+            >
+            <mat-icon matPrefix class="text-gray-400">lock</mat-icon>
+            <button 
+              mat-icon-button 
+              matSuffix 
+              type="button"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="'Toggle password visibility'"
+            >
+              <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+              <mat-error>{{ getPasswordError() }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Confirm Password Field -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Confirm Password</mat-label>
+            <input 
+              matInput 
+              [type]="hideConfirmPassword() ? 'password' : 'text'"
+              formControlName="confirmPassword"
+              placeholder="Re-enter your password"
+              autocomplete="new-password"
+            >
+            <mat-icon matPrefix class="text-gray-400">lock_outline</mat-icon>
+            <button 
+              mat-icon-button 
+              matSuffix 
+              type="button"
+              (click)="toggleConfirmPasswordVisibility()"
+              [attr.aria-label]="'Toggle confirm password visibility'"
+            >
+              <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            @if (signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched) {
+              <mat-error>{{ getConfirmPasswordError() }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Terms & Conditions -->
+          <div class="flex items-start">
+            <mat-checkbox formControlName="terms" color="primary" class="mt-1">
+              <span class="text-sm text-gray-700">
+                I agree to the 
+                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Terms of Service</a>
+                and 
+                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Privacy Policy</a>
+              </span>
+            </mat-checkbox>
+          </div>
+          @if (signupForm.get('terms')?.invalid && signupForm.get('terms')?.touched) {
+            <div class="text-red-600 text-xs -mt-3">
+              You must accept the terms and conditions
+            </div>
+          }
+
+          <!-- Signup Button -->
+          <button 
+            mat-flat-button 
+            color="primary" 
+            type="submit"
+            [disabled]="signupForm.invalid"
+            class="w-full !py-3 !text-lg !font-semibold !shadow-lg !mt-6"
+          >
+            <mat-icon class="mr-2">person_add</mat-icon>
+            Create Account
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-8">
+          <mat-divider></mat-divider>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="bg-white px-4 text-sm text-gray-500">Or sign up with</span>
+          </div>
+        </div>
+
+        <!-- Social Signup Buttons -->
+        <div class="grid grid-cols-3 gap-3">
+          <button 
+            mat-stroked-button 
+            type="button"
+            class="!py-3 hover:!bg-gray-50 transition-colors"
+          >
+            <mat-icon class="!text-red-500">mail</mat-icon>
+          </button>
+          <button 
+            mat-stroked-button 
+            type="button"
+            class="!py-3 hover:!bg-gray-50 transition-colors"
+          >
+            <mat-icon class="!text-blue-600">facebook</mat-icon>
+          </button>
+          <button 
+            mat-stroked-button 
+            type="button"
+            class="!py-3 hover:!bg-gray-50 transition-colors"
+          >
+            <mat-icon class="!text-gray-900">apple</mat-icon>
+          </button>
+        </div>
+
+        <!-- Login Link -->
+        <div class="text-center mt-6">
+          <p class="text-sm text-gray-600">
+            Already have an account?
+            <a routerLink="/login" class="font-medium text-blue-600 hover:text-blue-700 transition-colors ml-1">
+              Sign in
+            </a>
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Back to Home -->
+    <div class="text-center mt-6">
+      <button mat-button routerLink="/" class="!text-white hover:!bg-white/10 !transition-colors">
+        <mat-icon class="mr-2">arrow_back</mat-icon>
+        Back to Home
+      </button>
+    </div>
+  </div>
+</div>

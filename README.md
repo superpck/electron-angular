@@ -155,7 +155,11 @@ npm test
 - [Material Design Guidelines](https://m3.material.io/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
+## Credits
+
+This project was built with the assistance of [GitHub Copilot](https://github.com/features/copilot), an AI pair programmer that helped accelerate development and improve code quality.
+
 ## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

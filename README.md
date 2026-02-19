@@ -8,9 +8,13 @@ A modern desktop application starter template combining Electron, Angular 21, Ma
 - 🎨 **Material Design 3** - Beautiful Material UI components
 - 🌈 **Tailwind CSS 4** - Utility-first CSS framework
 - 🖥️ **Electron** - Cross-platform desktop app
-- 📱 **Responsive** - Works on all screen sizes
-- 🔒 **TypeScript** - Type-safe code
-- 🎯 **Modern Tooling** - Hot reload, fast builds
+- 📱 **Responsive Layout** - Sidenav shell with top nav and footer; sidenav collapses on small screens
+- 🔒 **TypeScript** - Type-safe code with strict mode
+- 🎯 **Modern Tooling** - Hot reload, fast builds, OnPush change detection
+- 🧩 **Component Examples** - Dedicated pages for Material and Tailwind showcase
+- 🧭 **Breadcrumb Navigation** - Auto-generated breadcrumbs on all non-home pages
+- 💬 **Chat Panel** - Right-side drawer with AI chat UI, accessible from the top nav
+- 📄 **Blank Page Template** - Ready-to-use page scaffold for new features
 
 ## Getting Started
 
@@ -84,19 +88,37 @@ Built applications will be in the `release/` directory.
 electron-angular/
 ├── src/
 │   ├── app/
-│   │   ├── home/          # Landing page
-│   │   ├── examples/      # Component examples
-│   │   ├── login/         # Login page
-│   │   └── signup/        # Signup page
-│   ├── styles.scss        # Global styles
-│   └── index.html         # Main HTML
+│   │   ├── configs/          # App-wide configuration (appName, version, apiBaseUrl)
+│   │   ├── layout/           # Shell layout (top nav, sidenav, chat drawer, footer)
+│   │   ├── home/             # Landing page (sidenav hidden by default)
+│   │   ├── blank/            # Blank page template for new features
+│   │   ├── examples/         # Component examples overview
+│   │   │   ├── material/     # Material Design examples page
+│   │   │   └── tailwind/     # Tailwind CSS examples page
+│   │   ├── login/            # Login page (outside layout)
+│   │   └── signup/           # Signup page (outside layout)
+│   ├── styles.scss           # Global styles
+│   └── index.html            # Main HTML
 ├── public/
 │   └── assets/
-│       └── images/        # Application icons
-├── electron-main.js       # Electron main process
-├── preload.js            # Electron preload script
-└── package.json          # Dependencies and scripts
+│       └── images/           # Application icons
+├── electron-main.js          # Electron main process
+├── preload.js                # Electron preload script
+├── CHANGELOG.md              # Version history
+└── package.json              # Dependencies and scripts
 ```
+
+## Routes
+
+| Path | Component | Layout |
+|---|---|---|
+| `/` | Home | ✅ Layout (sidenav hidden) |
+| `/examples` | Examples (overview) | ✅ Layout |
+| `/examples/material` | Material Examples | ✅ Layout |
+| `/examples/tailwind` | Tailwind Examples | ✅ Layout |
+| `/blank` | Blank Page Template | ✅ Layout |
+| `/login` | Login | ❌ No layout |
+| `/signup` | Signup | ❌ No layout |
 
 ## Available Scripts
 
@@ -163,3 +185,6 @@ This project was built with the assistance of [GitHub Copilot](https://github.co
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a detailed list of changes.

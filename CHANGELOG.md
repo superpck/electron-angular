@@ -1,0 +1,78 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [Unreleased] - 2026-02-19
+
+### Added
+
+#### Breadcrumb Navigation
+- Auto-generated breadcrumb bar displayed on all layout pages except Home
+- Resolves URL segments using a `labelMap` in `layout.ts`; supports `/examples`, `/examples/material`, `/examples/tailwind`, `/blank`
+- First item is always a Home link with a `home` icon; last item is rendered as plain text (not a link)
+- Updates reactively via `currentUrl` signal on every `NavigationEnd` event
+
+#### Chat Panel
+- Chat icon button (`chat`) added to the top-right of the navigation bar; highlights when the panel is open
+- **Right-side drawer** (`<mat-sidenav position="end">`, 360 px, `over` mode) — accessible from any page
+- Chat UI features:
+  - Scrollable message list with empty-state illustration
+  - User bubbles (indigo, right-aligned) and bot bubbles (white, left-aligned) with timestamps
+  - `<mat-form-field>` text input; send on **Enter** key or Send button (disabled when empty)
+  - Auto-scroll to latest message after each send/reply
+  - Placeholder bot reply after 600 ms (ready for AI integration)
+
+#### Blank Page Template
+- New `Blank` component (`src/app/blank/`) — standalone, OnPush scaffold with two Material card sections
+- Route `/blank` added inside Layout children in `app.routes.ts`
+- **Blank Page** nav item added to sidenav (after divider, before Docs)
+
+#### Sidenav Behaviour on Home
+- Sidenav is **hidden by default** when navigating to `/`
+- Hamburger menu button is visible on **all screen sizes** on the Home page so users can show the sidenav manually
+- Navigating to any other route automatically re-opens the sidenav on `lg+` screens
+
+---
+
+## [1.0.0] - 2026-02-19
+
+### Added
+
+#### Layout & Navigation
+- **Layout component** (`src/app/layout/`) — shared shell wrapping all authenticated pages
+  - **Top navigation bar** (`mat-toolbar`) with logo and Sign In button
+  - **Responsive sidenav** (`mat-sidenav`) — `side` mode on `lg+`, `over` mode on smaller screens with hamburger toggle
+  - **Sidenav footer** displaying app name and version from `configs/config.ts`
+  - **Footer** with branding and links
+- **Expandable sub-menu** for Examples in the sidenav with animated `chevron_right` icon
+
+#### Routing
+- `Layout` component added as parent route; `login` and `signup` routes remain outside (no layout)
+- Sub-routes for examples:
+  - `/examples` — combined overview (Material + Tailwind columns)
+  - `/examples/material` — Material Design examples standalone page
+  - `/examples/tailwind` — Tailwind CSS examples standalone page
+
+#### Examples
+- **MaterialExamples component** (`src/app/examples/material/`) — Material Buttons, Forms, Chips & Badges, Progress & Loading
+- **TailwindExamples component** (`src/app/examples/tailwind/`) — Tailwind Buttons, Colors & Grid, Badges, Progress
+
+#### Config
+- `src/app/configs/config.ts` — centralised app configuration (`appName`, `version`, `subVersion`, `apiBaseUrl`)
+
+### Changed
+
+- **Home page** — removed inline `mat-toolbar` and `<footer>` (now provided by Layout)
+- `home.ts` — removed `MatToolbarModule`, switched to `inject()` pattern, added `OnPush` change detection
+- **Examples page** — split monolithic component into two focused sub-components (`MaterialExamples`, `TailwindExamples`); parent retains Interactive Examples card
+
+### Refactored
+
+- All new components use `ChangeDetectionStrategy.OnPush`
+- Replaced constructor injection with `inject()` function throughout
+- Removed `@HostBinding`/`@HostListener` usage in favour of `host` object bindings

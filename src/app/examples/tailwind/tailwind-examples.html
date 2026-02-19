@@ -1,0 +1,103 @@
+<div class="flex flex-col gap-8 p-6">
+  <!-- Tailwind Buttons -->
+  <mat-card class="!shadow-lg hover:!shadow-xl transition-shadow">
+    <mat-card-header class="!bg-gradient-to-r !from-purple-50 !to-pink-50 !-m-4 !mb-4 !p-6 rounded-t-lg">
+      <mat-card-title class="!text-2xl !font-bold !text-gray-900 flex items-center gap-2">
+        <mat-icon class="text-purple-600">palette</mat-icon>
+        Tailwind Buttons
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="!pt-6">
+      <div class="space-y-4">
+        <div class="flex flex-wrap gap-3">
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors shadow-md">
+            Blue Button
+          </button>
+          <button class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-2 px-6 rounded-lg transition-all shadow-md">
+            Gradient
+          </button>
+          <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-full transition-colors shadow-md">
+            Rounded
+          </button>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button class="border-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white font-semibold py-2 px-6 rounded-lg transition-all">
+            Outlined
+          </button>
+          <button class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-6 rounded-lg transition-colors shadow-lg">
+            Dark
+          </button>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button class="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all" aria-label="Favorite">
+            <mat-icon class="!w-6 !h-6">favorite</mat-icon>
+          </button>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all" aria-label="Star">
+            <mat-icon class="!w-6 !h-6">star</mat-icon>
+          </button>
+          <button class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all" aria-label="Check">
+            <mat-icon class="!w-6 !h-6">check_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Tailwind Colors & Grid -->
+  <mat-card class="!shadow-lg hover:!shadow-xl transition-shadow">
+    <mat-card-header class="!bg-gradient-to-r !from-orange-50 !to-red-50 !-m-4 !mb-4 !p-6 rounded-t-lg">
+      <mat-card-title class="!text-2xl !font-bold !text-gray-900 flex items-center gap-2">
+        <mat-icon class="text-orange-600">color_lens</mat-icon>
+        Tailwind Colors & Grid
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="!pt-6">
+      <div class="space-y-6">
+        <div class="grid grid-cols-5 gap-3">
+          @for (color of colors; track color.name) {
+            <div class="text-center">
+              <div [class]="color.class + ' h-16 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer'">
+              </div>
+              <p class="text-xs mt-2 font-medium text-gray-600">{{ color.name }}</p>
+            </div>
+          }
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="bg-gradient-to-br from-blue-400 to-blue-600 p-4 rounded-xl shadow-lg text-white text-center">
+            <div class="text-3xl font-bold">123</div>
+            <div class="text-sm opacity-90">Total Users</div>
+          </div>
+          <div class="bg-gradient-to-br from-green-400 to-green-600 p-4 rounded-xl shadow-lg text-white text-center">
+            <div class="text-3xl font-bold">45</div>
+            <div class="text-sm opacity-90">Active</div>
+          </div>
+          <div class="bg-gradient-to-br from-purple-400 to-purple-600 p-4 rounded-xl shadow-lg text-white text-center">
+            <div class="text-3xl font-bold">89%</div>
+            <div class="text-sm opacity-90">Score</div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Tailwind Badges</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">New</span>
+            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Active</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Pending</span>
+            <span class="bg-red-100 text-red-800 text-xs font-semibold px-3 py-1 rounded-full">Error</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">Premium</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Tailwind Progress</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full w-[65%]"></div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

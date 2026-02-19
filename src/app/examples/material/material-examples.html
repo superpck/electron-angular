@@ -1,0 +1,150 @@
+<div class="flex flex-col gap-8 p-6">
+  <!-- Material Buttons -->
+  <mat-card class="!shadow-lg hover:!shadow-xl transition-shadow">
+    <mat-card-header class="!bg-gradient-to-r !from-blue-50 !to-indigo-50 !-m-4 !mb-4 !p-6 rounded-t-lg">
+      <mat-card-title class="!text-2xl !font-bold !text-gray-900 flex items-center gap-2">
+        <mat-icon class="text-indigo-600">smart_button</mat-icon>
+        Material Buttons
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="!pt-6">
+      <div class="space-y-4">
+        <div class="flex flex-wrap gap-3">
+          <button mat-flat-button color="primary">Primary</button>
+          <button mat-flat-button color="accent">Accent</button>
+          <button mat-flat-button color="warn">Warn</button>
+          <button mat-flat-button disabled>Disabled</button>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button mat-raised-button color="primary">Raised</button>
+          <button mat-stroked-button color="primary">Stroked</button>
+          <button mat-button color="primary">Basic</button>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button mat-fab color="primary" aria-label="Add">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" aria-label="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" aria-label="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Material Form Inputs -->
+  <mat-card class="!shadow-lg hover:!shadow-xl transition-shadow">
+    <mat-card-header class="!bg-gradient-to-r !from-green-50 !to-emerald-50 !-m-4 !mb-4 !p-6 rounded-t-lg">
+      <mat-card-title class="!text-2xl !font-bold !text-gray-900 flex items-center gap-2">
+        <mat-icon class="text-green-600">input</mat-icon>
+        Material Forms
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="!pt-6">
+      <div class="space-y-4">
+        <mat-form-field class="w-full">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Enter your name">
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput [formControl]="emailControl" placeholder="ex@example.com">
+          <mat-icon matPrefix>email</mat-icon>
+          @if (emailControl.invalid) {
+            <mat-error>{{ getErrorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Favorite Fruit</mat-label>
+          <mat-select [value]="selectedFruit()" (valueChange)="selectedFruit.set($event)">
+            @for (fruit of fruits; track fruit) {
+              <mat-option [value]="fruit.toLowerCase()">{{ fruit }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div class="space-y-3">
+          <mat-checkbox color="primary">Accept terms and conditions</mat-checkbox>
+          <mat-slide-toggle color="primary" [checked]="isToggled()" (change)="isToggled.set($event.checked)">
+            Enable notifications ({{ isToggled() ? 'ON' : 'OFF' }})
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Material Chips & Badges -->
+  <mat-card class="!shadow-lg hover:!shadow-xl transition-shadow">
+    <mat-card-header class="!bg-gradient-to-r !from-cyan-50 !to-blue-50 !-m-4 !mb-4 !p-6 rounded-t-lg">
+      <mat-card-title class="!text-2xl !font-bold !text-gray-900 flex items-center gap-2">
+        <mat-icon class="text-cyan-600">label</mat-icon>
+        Chips & Badges
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="!pt-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Material Chips</h3>
+          <mat-chip-set>
+            <mat-chip>Angular</mat-chip>
+            <mat-chip>TypeScript</mat-chip>
+            <mat-chip highlighted>Tailwind</mat-chip>
+            <mat-chip>Material</mat-chip>
+            <mat-chip disabled>Disabled</mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Badges</h3>
+          <div class="flex flex-wrap gap-6 items-center">
+            <button mat-icon-button [matBadge]="5" matBadgeColor="primary" aria-label="5 notifications">
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <button mat-icon-button [matBadge]="12" matBadgeColor="accent" aria-label="12 mails">
+              <mat-icon>mail</mat-icon>
+            </button>
+            <button mat-icon-button [matBadge]="99" matBadgeColor="warn" aria-label="99 errors">
+              <mat-icon>error</mat-icon>
+            </button>
+            <button mat-icon-button matBadge="NEW" matBadgeColor="primary" aria-label="New star">
+              <mat-icon>star</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Progress & Loading -->
+  <mat-card class="!shadow-lg hover:!shadow-xl transition-shadow">
+    <mat-card-header class="!bg-gradient-to-r !from-pink-50 !to-rose-50 !-m-4 !mb-4 !p-6 rounded-t-lg">
+      <mat-card-title class="!text-2xl !font-bold !text-gray-900 flex items-center gap-2">
+        <mat-icon class="text-pink-600">hourglass_empty</mat-icon>
+        Progress & Loading
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="!pt-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Material Progress Bar</h3>
+          <mat-progress-bar mode="determinate" [value]="progress()" color="primary"></mat-progress-bar>
+          <p class="text-sm text-gray-600 mt-2">Progress: {{ progress() }}%</p>
+        </div>
+
+        <div class="flex gap-6 items-center">
+          <mat-spinner diameter="40"></mat-spinner>
+          <mat-spinner diameter="40" color="accent"></mat-spinner>
+          <mat-spinner diameter="40" color="warn"></mat-spinner>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

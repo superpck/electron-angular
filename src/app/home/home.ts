@@ -1,10 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +17,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatToolbarModule,
     MatChipsModule,
     MatInputModule,
     MatFormFieldModule,
@@ -26,8 +24,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
+  private readonly snackBar = inject(MatSnackBar);
+
   protected readonly title = signal('Electron + Angular + Material + Tailwind');
   protected readonly features = signal([
     {
@@ -56,8 +57,6 @@ export class Home {
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
-
-  constructor(private snackBar: MatSnackBar) {}
 
   onQuickSignup(): void {
     if (this.signupForm.valid) {

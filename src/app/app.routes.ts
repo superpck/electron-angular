@@ -1,17 +1,39 @@
 import { Routes } from '@angular/router';
+import { Layout } from './layout/layout';
 import { Home } from './home/home';
+import { Blank } from './blank/blank';
 import { Examples } from './examples/examples';
+import { MaterialExamples } from './examples/material/material-examples';
+import { TailwindExamples } from './examples/tailwind/tailwind-examples';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
-  },
-  {
-    path: 'examples',
-    component: Examples,
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: Home,
+      },
+      {
+        path: 'examples',
+        component: Examples,
+      },
+      {
+        path: 'examples/material',
+        component: MaterialExamples,
+      },
+      {
+        path: 'examples/tailwind',
+        component: TailwindExamples,
+      },
+      {
+        path: 'blank',
+        component: Blank,
+      },
+    ],
   },
   {
     path: 'login',

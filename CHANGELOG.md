@@ -7,13 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased] - 2026-02-19
+## [1.0.2] - 2026-02-19
+
+`subVersion: 2026.02.19-3`
 
 ### Added
 
+#### User Detail Modal
+- Clicking a user card or table row opens a **Material dialog** (`UserDetailDialog`) with full user details
+- Dialog content organised into 4 sections: **Contact** (email, phone, cell), **Personal** (DOB, gender, nationality), **Location** (full address), **Account** (username, registered date)
+- Large avatar displayed in dialog header alongside full name (with title), gender/age, and nationality chip
+- `User` interface extended with `login.username` and `registered` fields
+
+#### Dialog Backdrop & Scroll Lock
+- Custom `dialog-freeze-backdrop` class applies `backdrop-filter: blur(4px)` and dark semi-transparent overlay when dialog is open
+- **Background scroll locked** on `mat-sidenav-content` (`.layout-sidenav-content`) via `dialog-scroll-lock` CSS class added on open and removed on `afterClosed()` — works correctly with Angular Material's sidenav scroll container
+
+---
+
+## [1.0.1] - 2026-02-19
+
+`subVersion: 2026.02.19-2`
+
+### Added
+
+#### Users Page
+- **UserService** (`src/app/services/user.service.ts`) — fetches 100 users from [randomuser.me](https://randomuser.me/) with full TypeScript interfaces (`User`, `UserName`, `UserPicture`, `UserLocation`)
+- **Users component** (`src/app/users/`) — standalone, OnPush
+  - Real-time search by name, email, city, or country with clear button
+  - **Card / Table view toggle** (`mat-button-toggle-group`) — persists during search
+  - **Card view**: responsive auto-fill grid (min 300 px), avatar, name, gender/age, email, phone, location, nationality chip
+  - **Table view**: `MatTableDataSource` with sticky header; columns — avatar, name, email, phone, location, nat
+  - **Pagination** (table view only): `MatPaginator` with page sizes 10 / 25 / 50, first/last buttons; resets to page 1 on search change
+  - Loading spinner, error state with Retry, empty search result state
+  - Credit link to [randomuser.me](https://randomuser.me/) shown below data
+- Route `/users` added inside Layout children
+- **Users** nav item (`group` icon) added to sidenav
+- `provideHttpClient()` registered in `app.config.ts`
+- `'users'` label added to breadcrumb `labelMap`
+
 #### Breadcrumb Navigation
 - Auto-generated breadcrumb bar displayed on all layout pages except Home
-- Resolves URL segments using a `labelMap` in `layout.ts`; supports `/examples`, `/examples/material`, `/examples/tailwind`, `/blank`
+- Resolves URL segments using a `labelMap` in `layout.ts`; supports `/examples`, `/examples/material`, `/examples/tailwind`, `/blank`, `/users`
 - First item is always a Home link with a `home` icon; last item is rendered as plain text (not a link)
 - Updates reactively via `currentUrl` signal on every `NavigationEnd` event
 

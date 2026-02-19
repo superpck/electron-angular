@@ -69,6 +69,7 @@ export class Layout {
       material: 'Material',
       tailwind: 'Tailwind',
       blank: 'Blank Page',
+      users: 'Users',
     };
 
     return url

@@ -1,0 +1,114 @@
+<div class="user-detail-dialog">
+  <!-- Header -->
+  <div class="dialog-header">
+    <img [src]="user.picture.large" [alt]="fullName" class="dialog-avatar" width="96" height="96" />
+    <div class="flex-1 min-w-0">
+      <h2 mat-dialog-title class="!text-xl !font-semibold !text-gray-900 !m-0 truncate">{{ fullName }}</h2>
+      <p class="text-sm text-gray-500 capitalize mt-0.5">{{ user.gender }} · Age {{ user.dob.age }}</p>
+      <div class="flex items-center gap-2 mt-2 flex-wrap">
+        <mat-chip class="!text-xs">{{ user.nat }}</mat-chip>
+        <span class="text-xs text-gray-400 capitalize">{{ user.location.country }}</span>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close" class="!self-start !-mr-2 !-mt-2">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="!pt-0 !px-6">
+    <mat-divider class="!mb-4" />
+
+    <!-- Contact -->
+    <h3 class="dialog-section-title">Contact</h3>
+    <div class="dialog-info-grid">
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">email</mat-icon>
+        <div>
+          <p class="dialog-info-label">Email</p>
+          <a [href]="'mailto:' + user.email" class="dialog-info-value text-indigo-600 hover:underline">
+            {{ user.email }}
+          </a>
+        </div>
+      </div>
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">phone</mat-icon>
+        <div>
+          <p class="dialog-info-label">Phone</p>
+          <p class="dialog-info-value">{{ user.phone }}</p>
+        </div>
+      </div>
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">smartphone</mat-icon>
+        <div>
+          <p class="dialog-info-label">Cell</p>
+          <p class="dialog-info-value">{{ user.cell }}</p>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider class="!my-4" />
+
+    <!-- Personal -->
+    <h3 class="dialog-section-title">Personal</h3>
+    <div class="dialog-info-grid">
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">cake</mat-icon>
+        <div>
+          <p class="dialog-info-label">Date of birth</p>
+          <p class="dialog-info-value">{{ user.dob.date | date:'dd MMM yyyy' }}</p>
+        </div>
+      </div>
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">person</mat-icon>
+        <div>
+          <p class="dialog-info-label">Gender</p>
+          <p class="dialog-info-value capitalize">{{ user.gender }}</p>
+        </div>
+      </div>
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">flag</mat-icon>
+        <div>
+          <p class="dialog-info-label">Nationality</p>
+          <p class="dialog-info-value">{{ user.nat }}</p>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider class="!my-4" />
+
+    <!-- Location -->
+    <h3 class="dialog-section-title">Location</h3>
+    <div class="dialog-info-item">
+      <mat-icon class="dialog-info-icon">location_on</mat-icon>
+      <div>
+        <p class="dialog-info-label">Address</p>
+        <p class="dialog-info-value">{{ fullAddress }}</p>
+      </div>
+    </div>
+
+    <mat-divider class="!my-4" />
+
+    <!-- Account -->
+    <h3 class="dialog-section-title">Account</h3>
+    <div class="dialog-info-grid">
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">badge</mat-icon>
+        <div>
+          <p class="dialog-info-label">Username</p>
+          <p class="dialog-info-value">{{ user.login.username }}</p>
+        </div>
+      </div>
+      <div class="dialog-info-item">
+        <mat-icon class="dialog-info-icon">how_to_reg</mat-icon>
+        <div>
+          <p class="dialog-info-label">Registered</p>
+          <p class="dialog-info-value">{{ user.registered.date | date:'dd MMM yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="!px-6 !pb-4">
+    <button mat-flat-button color="primary" (click)="dialogRef.close()">Close</button>
+  </mat-dialog-actions>
+</div>

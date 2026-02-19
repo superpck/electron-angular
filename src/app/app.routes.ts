@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Layout } from './layout/layout';
 import { Home } from './home/home';
 import { Blank } from './blank/blank';
+import { Users } from './users/users';
 import { Examples } from './examples/examples';
 import { MaterialExamples } from './examples/material/material-examples';
 import { TailwindExamples } from './examples/tailwind/tailwind-examples';
@@ -32,6 +33,10 @@ export const routes: Routes = [
       {
         path: 'blank',
         component: Blank,
+      },
+      {
+        path: 'users',
+        component: Users,
       },
     ],
   },

@@ -55,3 +55,80 @@
   border-bottom: 3px solid #088b71;
   border-radius: 10px;
 }
+
+.dialog-freeze-backdrop {
+  background: rgba(15, 15, 30, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.dialog-scroll-lock {
+  overflow: hidden !important;
+}
+
+// ── User Detail Dialog ───────────────────────────────────
+.user-detail-dialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px 16px;
+}
+
+.dialog-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.dialog-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  margin: 0 0 12px;
+}
+
+.dialog-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.dialog-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.dialog-info-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  line-height: 18px !important;
+  color: #6366f1;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.dialog-info-label {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 0 0 2px;
+}
+
+.dialog-info-value {
+  font-size: 13px;
+  color: #1f2937;
+  margin: 0;
+  word-break: break-word;
+}

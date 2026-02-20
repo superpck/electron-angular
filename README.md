@@ -11,10 +11,13 @@ A modern desktop application starter template combining Electron, Angular 21, Ma
 - 📱 **Responsive Layout** - Sidenav shell with top nav and footer; sidenav collapses on small screens
 - 🔒 **TypeScript** - Type-safe code with strict mode
 - 🎯 **Modern Tooling** - Hot reload, fast builds, OnPush change detection
+- 🌙 **Dark / Light Mode** - Sidenav slide-toggle; theme persisted in `localStorage`; applies to Material and Tailwind classes
+- 🔲 **Top Bar Toggle** - Show/hide the top navigation bar from the sidenav; state persisted in `localStorage`; floating FAB menu button shown when top bar is hidden
 - 🧩 **Component Examples** - Dedicated pages for Material and Tailwind showcase
 - 🧭 **Breadcrumb Navigation** - Auto-generated breadcrumbs on all non-home pages
 - 💬 **Chat Panel** - Right-side drawer with AI chat UI, accessible from the top nav
-- �️ **Users Page** - Fetches 100 users from randomuser.me with card/table toggle, search, pagination, and detail modal with blur backdrop- 📄 **Blank Page Template** - Ready-to-use page scaffold for new features
+- 👥 **Users Page** - Fetches 100 users from randomuser.me with card/table toggle, search, pagination, and detail modal with blur backdrop
+- 📄 **Blank Page Template** - Ready-to-use page scaffold for new features
 ## Getting Started
 
 ### Installation
@@ -98,7 +101,7 @@ electron-angular/
 │   │   │   └── tailwind/     # Tailwind CSS examples page
 │   │   ├── login/            # Login page (outside layout)
 │   │   ├── signup/           # Signup page (outside layout)
-│   │   └── services/         # Shared services (UserService, …)
+│   │   └── services/         # Shared services (UserService, ThemeService)
 │   ├── styles.scss           # Global styles
 │   └── index.html            # Main HTML
 ├── public/
@@ -110,7 +113,7 @@ electron-angular/
 └── package.json              # Dependencies and scripts
 ```
 
-> Current build: `subVersion 2026.02.19-3`
+> Current build: `subVersion 2026.02.20-1`
 
 ## Routes
 

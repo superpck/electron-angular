@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.3] - 2026-02-20
+
+`subVersion: 2026.02.20-1`
+
+### Added
+
+#### Dark / Light Mode
+- **ThemeService** (`src/app/services/theme.service.ts`) — singleton service managing global theme state via `isDark` signal
+- Toggles `.dark` class on `<html>` element; change is reflected in both Angular Material (`color-scheme`) and Tailwind CSS (`dark:` variant)
+- Theme persisted to `localStorage` under the key `theme`; restored automatically on app load
+- `@custom-variant dark (&:where(.dark, .dark *))` configured in `styles.scss` for Tailwind v4 dark variant
+- `html { color-scheme: light }` / `html.dark { color-scheme: dark }` added to `material-theme.scss` for Material Design 3 dark colours
+- All page templates (`home`, `users`, `examples`, `material-examples`, `tailwind-examples`, `user-detail-dialog`, `login`, `signup`, `blank`) updated with `dark:` Tailwind utility classes
+- `mat-slide-toggle` in the sidenav footer switches between Light mode and Dark mode; icon and label update reactively
+
+#### Top Bar Toggle
+- `mat-slide-toggle` in the sidenav footer toggles the top navigation bar (`<mat-toolbar>`) visibility
+- `topnavVisible` signal initialised from `localStorage` key `topnavVisible`; changes persisted via `effect()`
+- When the top bar is hidden a **floating FAB-style menu button** (fixed, top-left) is rendered so the sidenav can still be opened; button background and icon colour follow the active theme
+
+---
+
 ## [1.0.2] - 2026-02-19
 
 `subVersion: 2026.02.19-3`

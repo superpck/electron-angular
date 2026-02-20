@@ -1,12 +1,9 @@
 @use "tailwindcss";
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+// Enable class-based dark mode for Tailwind v4
+// The `dark:` variant activates when a `.dark` class is on any ancestor element
+@custom-variant dark (&:where(.dark, .dark *));
 // Import Material Icons
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -86,6 +83,10 @@
   object-fit: cover;
   border: 3px solid #e5e7eb;
   flex-shrink: 0;
+
+  :where(.dark, .dark *) & {
+    border-color: #374151;
+  }
 }
 
 .dialog-section-title {
@@ -131,4 +132,8 @@
   color: #1f2937;
   margin: 0;
   word-break: break-word;
+
+  :where(.dark, .dark *) & {
+    color: #e5e7eb;
+  }
 }

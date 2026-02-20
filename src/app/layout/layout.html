@@ -1,6 +1,8 @@
 <div class="layout-host">
   <!-- Top Navigation Bar -->
-  <mat-toolbar class="layout-toolbar !bg-white/95 backdrop-blur-lg !border-b !border-gray-100">
+  @if (topnavVisible()) {
+  <mat-toolbar
+    class="layout-toolbar !bg-white/95 dark:!bg-gray-900/95 backdrop-blur-lg !border-b !border-gray-100 dark:!border-gray-700">
     <div class="flex items-center w-full gap-2">
 
       <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle navigation menu">
@@ -14,7 +16,7 @@
       <a class="flex items-center space-x-2 no-underline">
         <mat-icon class="text-indigo-600">rocket_launch</mat-icon>
         <span class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-          Electron Starter
+          {{ config.appName }} {{ config.version }}
         </span>
       </a>
 
@@ -22,9 +24,13 @@
 
       <!-- Top-right navigation links -->
       <div class="flex items-center gap-2">
-        <button mat-icon-button (click)="toggleChat()" aria-label="Toggle chat"
-          [class.text-indigo-600]="chatOpened()">
-          <mat-icon>chat</mat-icon>
+        <button mat-icon-button (click)="toggleChat()" [attr.aria-label]="chatOpened() ? 'Close chat' : 'Open chat'"
+          [attr.aria-pressed]="chatOpened()" [class.text-indigo-600]="chatOpened()">
+          @if (chatOpened()) {
+          <mat-icon>chat_bubble</mat-icon>
+          } @else {
+          <mat-icon>chat_bubble_outline</mat-icon>
+          }
         </button>
         <button mat-raised-button color="primary" routerLink="/login">
           <mat-icon>login</mat-icon>
@@ -33,91 +39,125 @@
       </div>
     </div>
   </mat-toolbar>
+  }
+
+  <!-- Floating menu button (shown when topnav is hidden) -->
+  @if (!topnavVisible()) {
+  <button mat-icon-button class="layout-fab-menu" (click)="toggleSidenav()" aria-label="Toggle navigation menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  }
 
   <!-- Sidenav + Main content -->
   <mat-sidenav-container class="layout-sidenav-container">
     <!-- Left Sidenav -->
     <mat-sidenav [opened]="sidenavOpened()" [mode]="isLargeScreen() ? 'side' : 'over'"
-      (openedChange)="sidenavOpened.set($event)" class="layout-sidenav">
+      (openedChange)="sidenavOpened.set($event)" class="layout-sidenav dark:!bg-gray-900 dark:!border-gray-700">
       <div class="sidenav-inner">
-      <div class="px-4 py-6">
-        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 px-2">Navigation</p>
-      </div>
-
-      <mat-nav-list>
-        <a mat-list-item routerLink="/" routerLinkActive="sidenav-active" [routerLinkActiveOptions]="{ exact: true }"
-          class="!rounded-lg !mx-2">
-          <mat-icon matListItemIcon>home</mat-icon>
-          <span matListItemTitle>Home</span>
-        </a>
-
-        <!-- Examples expandable group -->
-        <mat-list-item class="!rounded-lg !mx-2" [class.sidenav-active]="examplesExpanded()" (click)="toggleExamples()"
-          style="cursor: pointer;">
-          <mat-icon matListItemIcon>science</mat-icon>
-          <span matListItemTitle>Examples</span>
-          <span matListItemMeta>
-            <mat-icon style="transition: transform 0.2s; font-size: 18px;"
-              [style.transform]="examplesExpanded() ? 'rotate(90deg)' : 'rotate(0deg)'">chevron_right</mat-icon>
-          </span>
-        </mat-list-item>
-
-        <!-- Sub-menu items -->
-        @if (examplesExpanded()) {
-        <mat-nav-list class="sidenav-submenu !py-0">
-          <a mat-list-item routerLink="/examples/material" routerLinkActive="sidenav-active"
-            class="!rounded-lg !ml-6 !mr-2">
-            <mat-icon matListItemIcon class="!text-indigo-500">widgets</mat-icon>
-            <span matListItemTitle>Material</span>
-          </a>
-
-          <a mat-list-item routerLink="/examples/tailwind" routerLinkActive="sidenav-active"
-            class="!rounded-lg !ml-6 !mr-2">
-            <mat-icon matListItemIcon class="!text-purple-500">style</mat-icon>
-            <span matListItemTitle>Tailwind</span>
-          </a>
-        </mat-nav-list>
+        @if (!topnavVisible()) {
+        <div class="px-4 pt-6 pb-2">
+          <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1 px-1">
+            {{ config.appName }}
+          </p>
+        </div>
         }
 
-        <mat-divider class="!my-3"></mat-divider>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/" routerLinkActive="sidenav-active" [routerLinkActiveOptions]="{ exact: true }"
+            class="!rounded-lg !mx-2">
+            <mat-icon matListItemIcon>home</mat-icon>
+            <span matListItemTitle>Home</span>
+          </a>
 
-        <a mat-list-item routerLink="/users" routerLinkActive="sidenav-active" class="!rounded-lg !mx-2">
-          <mat-icon matListItemIcon>group</mat-icon>
-          <span matListItemTitle>Users</span>
-        </a>
+          <!-- Examples expandable group -->
+          <mat-list-item class="!rounded-lg !mx-2" [class.sidenav-active]="examplesExpanded()"
+            (click)="toggleExamples()" style="cursor: pointer;">
+            <mat-icon matListItemIcon>science</mat-icon>
+            <span matListItemTitle>Examples</span>
+            <span matListItemMeta>
+              <mat-icon style="transition: transform 0.2s; font-size: 18px;"
+                [style.transform]="examplesExpanded() ? 'rotate(90deg)' : 'rotate(0deg)'">chevron_right</mat-icon>
+            </span>
+          </mat-list-item>
 
-        <a mat-list-item routerLink="/blank" routerLinkActive="sidenav-active" class="!rounded-lg !mx-2">
-          <mat-icon matListItemIcon>article</mat-icon>
-          <span matListItemTitle>Blank Page</span>
-        </a>
+          <!-- Sub-menu items -->
+          @if (examplesExpanded()) {
+          <mat-nav-list class="sidenav-submenu !py-0">
+            <a mat-list-item routerLink="/examples/material" routerLinkActive="sidenav-active"
+              class="!rounded-lg !ml-6 !mr-2">
+              <mat-icon matListItemIcon class="!text-indigo-500">widgets</mat-icon>
+              <span matListItemTitle>Material</span>
+            </a>
 
-        <a mat-list-item class="!rounded-lg !mx-2">
-          <mat-icon matListItemIcon>description</mat-icon>
-          <span matListItemTitle>Docs</span>
-        </a>
+            <a mat-list-item routerLink="/examples/tailwind" routerLinkActive="sidenav-active"
+              class="!rounded-lg !ml-6 !mr-2">
+              <mat-icon matListItemIcon class="!text-purple-500">style</mat-icon>
+              <span matListItemTitle>Tailwind</span>
+            </a>
+          </mat-nav-list>
+          }
 
-        <a mat-list-item class="!rounded-lg !mx-2">
-          <mat-icon matListItemIcon>settings</mat-icon>
-          <span matListItemTitle>Settings</span>
-        </a>
-      </mat-nav-list>
-      <!-- Sidenav footer -->
-      <div class="mt-auto px-4 py-3 border-t border-gray-100">
-        <p class="text-xs font-semibold text-gray-700 truncate">{{ config.appName }}</p>
-        <p class="text-xs text-gray-400">v{{ config.version }}</p>
-      </div>
+          <mat-divider class="!my-3"></mat-divider>
+
+          <a mat-list-item routerLink="/users" routerLinkActive="sidenav-active" class="!rounded-lg !mx-2">
+            <mat-icon matListItemIcon>group</mat-icon>
+            <span matListItemTitle>Users</span>
+          </a>
+
+          <a mat-list-item routerLink="/blank" routerLinkActive="sidenav-active" class="!rounded-lg !mx-2">
+            <mat-icon matListItemIcon>article</mat-icon>
+            <span matListItemTitle>Blank Page</span>
+          </a>
+
+          <a mat-list-item class="!rounded-lg !mx-2">
+            <mat-icon matListItemIcon>description</mat-icon>
+            <span matListItemTitle>Docs</span>
+          </a>
+
+          <a mat-list-item class="!rounded-lg !mx-2">
+            <mat-icon matListItemIcon>settings</mat-icon>
+            <span matListItemTitle>Settings</span>
+          </a>
+        </mat-nav-list>
+        <!-- Sidenav footer -->
+        <div class="mt-auto px-4 py-3 border-t border-gray-100 dark:border-gray-700">
+          <!-- Dark / Light mode toggle -->
+          <div class="flex items-center justify-between py-2">
+            <div class="flex items-center gap-2">
+              <mat-icon class="!text-base !w-4 !h-4 !leading-none text-gray-500 dark:text-gray-400">
+                {{ themeService.isDark() ? 'dark_mode' : 'light_mode' }}
+              </mat-icon>
+              <span class="text-xs text-gray-600 dark:text-gray-400">
+                {{ themeService.isDark() ? 'Dark mode' : 'Light mode' }}
+              </span>
+            </div>
+            <mat-slide-toggle [checked]="themeService.isDark()" (change)="themeService.toggle()" color="primary"
+              aria-label="Toggle dark mode" />
+          </div>
+          <!-- Top nav toggle -->
+          <div class="flex items-center justify-between py-2 mb-2">
+            <div class="flex items-center gap-2">
+              <mat-icon class="!text-base !w-4 !h-4 !leading-none text-gray-500 dark:text-gray-400">web_asset</mat-icon>
+              <span class="text-xs text-gray-600 dark:text-gray-400">Top bar</span>
+            </div>
+            <mat-slide-toggle [checked]="topnavVisible()" (change)="toggleTopnav()" color="primary"
+              aria-label="Toggle top navigation bar" />
+          </div>
+          <p class="text-xs font-semibold text-gray-700 dark:text-gray-300 truncate">{{ config.appName }}</p>
+          <p class="text-xs text-gray-400 dark:text-gray-500">v{{ config.version }}</p>
+        </div>
       </div>
     </mat-sidenav>
 
     <!-- Right Chat Drawer -->
-    <mat-sidenav position="end" [opened]="chatOpened()" mode="over"
-      (openedChange)="chatOpened.set($event)" class="chat-drawer">
+    <mat-sidenav position="end" [opened]="chatOpened()" mode="over" (openedChange)="chatOpened.set($event)"
+      class="chat-drawer dark:!bg-gray-900 dark:!border-gray-700">
       <div class="chat-panel">
         <!-- Chat Header -->
         <div class="chat-header">
           <div class="flex items-center gap-2">
-            <mat-icon class="text-indigo-500">smart_toy</mat-icon>
-            <span class="font-semibold text-gray-800">AI Chat</span>
+            <mat-icon class="text-indigo-500 dark:text-indigo-400">smart_toy</mat-icon>
+            <span class="font-semibold text-gray-800 dark:text-gray-200">AI Chat</span>
           </div>
           <button mat-icon-button (click)="toggleChat()" aria-label="Close chat">
             <mat-icon>close</mat-icon>
@@ -127,8 +167,9 @@
         <!-- Messages -->
         <div class="chat-messages">
           @if (chatMessages().length === 0) {
-          <div class="flex flex-col items-center justify-center h-full gap-3 text-gray-400">
-            <mat-icon class="!text-5xl !w-12 !h-12 !leading-none text-indigo-200">chat_bubble_outline</mat-icon>
+          <div class="flex flex-col items-center justify-center h-full gap-3 text-gray-400 dark:text-gray-500">
+            <mat-icon
+              class="!text-5xl !w-12 !h-12 !leading-none text-indigo-200 dark:text-indigo-900">chat_bubble_outline</mat-icon>
             <p class="text-sm text-center">Start a conversation!<br />Type a message below.</p>
           </div>
           }
@@ -147,11 +188,11 @@
         <!-- Input -->
         <div class="chat-input-area">
           <mat-form-field appearance="outline" class="w-full !text-sm" subscriptSizing="dynamic">
-            <input matInput [formControl]="chatInput" placeholder="Type a message…"
-              (keydown.enter)="sendMessage()" autocomplete="off" />
+            <input matInput [formControl]="chatInput" placeholder="Type a message…" (keydown.enter)="sendMessage()"
+              autocomplete="off" />
           </mat-form-field>
-          <button mat-flat-button color="primary" (click)="sendMessage()"
-            [disabled]="!chatInput.value?.trim()" aria-label="Send">
+          <button mat-flat-button color="primary" (click)="sendMessage()" [disabled]="!chatInput.value?.trim()"
+            aria-label="Send">
             <mat-icon>send</mat-icon>
           </button>
         </div>
@@ -163,20 +204,23 @@
       <main>
         @if (breadcrumbs().length > 0) {
         <nav aria-label="Breadcrumb" class="px-6 pt-5 pb-0">
-          <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-500">
+          <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
             <li>
-              <a routerLink="/" class="flex items-center gap-1 hover:text-indigo-600 transition-colors">
+              <a routerLink="/"
+                class="flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                 <mat-icon class="!text-base !w-4 !h-4 !leading-none">home</mat-icon>
                 <span>Home</span>
               </a>
             </li>
             @for (crumb of breadcrumbs(); track crumb.url; let last = $last) {
             <li class="flex items-center gap-1">
-              <mat-icon class="!text-sm !w-4 !h-4 !leading-none text-gray-400">chevron_right</mat-icon>
+              <mat-icon
+                class="!text-sm !w-4 !h-4 !leading-none text-gray-400 dark:text-gray-600">chevron_right</mat-icon>
               @if (last) {
-              <span class="font-medium text-gray-800">{{ crumb.label }}</span>
+              <span class="font-medium text-gray-800 dark:text-gray-200">{{ crumb.label }}</span>
               } @else {
-              <a [routerLink]="crumb.url" class="hover:text-indigo-600 transition-colors">{{ crumb.label }}</a>
+              <a [routerLink]="crumb.url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{
+                crumb.label }}</a>
               }
             </li>
             }
@@ -187,7 +231,7 @@
       </main>
 
       <!-- Footer -->
-      <footer class="py-8 px-4 bg-gray-900 text-white">
+      <footer class="py-8 px-4 bg-gray-900 dark:bg-gray-950 text-white">
         <div class="container mx-auto max-w-6xl">
           <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">

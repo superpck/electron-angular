@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
 import config from '../configs/config';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, NavigationEnd } from '@angular/router';
+import { ThemeService } from '../services/theme.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { filter } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DatePipe } from '@angular/common';
 
 export interface ChatMessage {
@@ -36,6 +38,7 @@ export interface ChatMessage {
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
@@ -44,11 +47,13 @@ export interface ChatMessage {
 export class Layout {
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
+  protected readonly themeService = inject(ThemeService);
 
   protected readonly isLargeScreen = signal(false);
   protected readonly sidenavOpened = signal(false);
   protected readonly examplesExpanded = signal(false);
   protected readonly chatOpened = signal(false);
+  protected readonly topnavVisible = signal<boolean>(localStorage.getItem('topnavVisible') !== 'false');
   protected readonly chatMessages = signal<ChatMessage[]>([]);
   protected readonly chatInput = new FormControl('');
   protected readonly config = config;
@@ -85,6 +90,10 @@ export class Layout {
   });
 
   constructor() {
+    effect(() => {
+      localStorage.setItem('topnavVisible', String(this.topnavVisible()));
+    });
+
     this.breakpointObserver.observe('(min-width: 1024px)').subscribe(result => {
       this.isLargeScreen.set(result.matches);
       // Only auto-open sidenav on large screen when NOT on home page
@@ -140,6 +149,10 @@ export class Layout {
 
   protected toggleExamples(): void {
     this.examplesExpanded.update(v => !v);
+  }
+
+  protected toggleTopnav(): void {
+    this.topnavVisible.update(v => !v);
   }
 }
 

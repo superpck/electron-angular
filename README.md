@@ -175,6 +175,10 @@ To execute unit tests with Vitest:
 npm test
 ```
 
+## Screenshot
+Home screen
+![Home](main_screen.png)
+
 ## Additional Resources
 
 - [Angular CLI Documentation](https://angular.dev/tools/cli)

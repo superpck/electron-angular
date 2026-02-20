@@ -98,7 +98,7 @@
           <!-- Terms & Conditions -->
           <div class="flex items-start">
             <mat-checkbox formControlName="terms" color="primary" class="mt-1">
-              <span class="text-sm text-gray-700">
+              <span class="text-sm text-gray-700 dark:text-gray-300">
                 I agree to the 
                 <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Terms of Service</a>
                 and 
@@ -129,7 +129,7 @@
         <div class="relative my-8">
           <mat-divider></mat-divider>
           <div class="absolute inset-0 flex items-center justify-center">
-            <span class="bg-white px-4 text-sm text-gray-500">Or sign up with</span>
+            <span class="bg-white dark:bg-gray-800 px-4 text-sm text-gray-500 dark:text-gray-400">Or sign up with</span>
           </div>
         </div>
 
@@ -138,29 +138,29 @@
           <button 
             mat-stroked-button 
             type="button"
-            class="!py-3 hover:!bg-gray-50 transition-colors"
+            class="!py-3 hover:!bg-gray-50 dark:hover:!bg-gray-700 transition-colors"
           >
             <mat-icon class="!text-red-500">mail</mat-icon>
           </button>
           <button 
             mat-stroked-button 
             type="button"
-            class="!py-3 hover:!bg-gray-50 transition-colors"
+            class="!py-3 hover:!bg-gray-50 dark:hover:!bg-gray-700 transition-colors"
           >
             <mat-icon class="!text-blue-600">facebook</mat-icon>
           </button>
           <button 
             mat-stroked-button 
             type="button"
-            class="!py-3 hover:!bg-gray-50 transition-colors"
+            class="!py-3 hover:!bg-gray-50 dark:hover:!bg-gray-700 transition-colors"
           >
-            <mat-icon class="!text-gray-900">apple</mat-icon>
+            <mat-icon class="!text-gray-900 dark:!text-gray-100">apple</mat-icon>
           </button>
         </div>
 
         <!-- Login Link -->
         <div class="text-center mt-6">
-          <p class="text-sm text-gray-600">
+          <p class="text-sm text-gray-600 dark:text-gray-400">
             Already have an account?
             <a routerLink="/login" class="font-medium text-blue-600 hover:text-blue-700 transition-colors ml-1">
               Sign in

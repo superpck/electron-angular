@@ -9,6 +9,10 @@
   flex-shrink: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   z-index: 10;
+
+  :where(.dark, .dark *) & {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .layout-sidenav-container {
@@ -16,10 +20,40 @@
   min-height: 0;
 }
 
+.layout-fab-menu {
+  position: fixed;
+  top: 4px;
+  left: 4px;
+  z-index: 999;
+  background: rgba(82, 85, 94, 0.5) !important;
+  // backdrop-filter: blur(8px);
+  // box-shadow: 0 2px 8px rgba(163, 162, 162, 0.225);
+  // border-radius: 50%;
+
+  mat-icon {
+    color: #fff;
+  }
+
+  :where(.dark, .dark *) & {
+    background: rgba(17, 24, 39, 0.9) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    color: #e5e7eb !important;
+
+    mat-icon {
+      color: #e5e7eb;
+    }
+  }
+}
+
 .layout-sidenav {
   width: 260px;
   border-right: 1px solid #e5e7eb;
   background: #fff;
+
+  :where(.dark, .dark *) & {
+    border-right-color: #374151;
+    background: #111827;
+  }
 
   .sidenav-inner {
     display: flex;
@@ -44,6 +78,15 @@
   mat-icon {
     color: #4f46e5 !important;
   }
+
+  :where(.dark, .dark *) & {
+    background-color: rgba(99, 102, 241, 0.2) !important;
+    color: #818cf8 !important;
+
+    mat-icon {
+      color: #818cf8 !important;
+    }
+  }
 }
 
 .sidenav-submenu {
@@ -51,12 +94,20 @@
   border-left: 2px solid #e5e7eb;
   margin-left: 24px;
   margin-right: 8px;
+
+  :where(.dark, .dark *) & {
+    border-left-color: #374151;
+  }
 }
 
 // ── Chat Drawer ──────────────────────────────────────────
 .chat-drawer {
   width: 360px;
   border-left: 1px solid #e5e7eb;
+
+  :where(.dark, .dark *) & {
+    border-left-color: #374151;
+  }
 }
 
 .chat-panel {
@@ -64,6 +115,10 @@
   flex-direction: column;
   height: 100%;
   background: #f9fafb;
+
+  :where(.dark, .dark *) & {
+    background: #1f2937;
+  }
 }
 
 .chat-header {
@@ -74,6 +129,11 @@
   background: #fff;
   border-bottom: 1px solid #e5e7eb;
   flex-shrink: 0;
+
+  :where(.dark, .dark *) & {
+    background: #111827;
+    border-bottom-color: #374151;
+  }
 }
 
 .chat-messages {
@@ -115,6 +175,12 @@
       .chat-time {
         color: #9ca3af;
       }
+
+      :where(.dark, .dark *) & {
+        background: #111827;
+        color: #e5e7eb;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      }
     }
   }
 }
@@ -144,4 +210,9 @@
   background: #fff;
   border-top: 1px solid #e5e7eb;
   flex-shrink: 0;
+
+  :where(.dark, .dark *) & {
+    background: #111827;
+    border-top-color: #374151;
+  }
 }

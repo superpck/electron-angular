@@ -17,6 +17,7 @@ A modern desktop application starter template combining Electron, Angular 21, Ma
 - 🧭 **Breadcrumb Navigation** - Auto-generated breadcrumbs on all non-home pages
 - 💬 **Chat Panel** - Right-side drawer with AI chat UI, accessible from the top nav
 - 👥 **Users Page** - Fetches 100 users from randomuser.me with card/table toggle, search, pagination, and detail modal with blur backdrop
+- 🏠 **Home Page** - Hero section with feature highlights and inline quick-signup form (name + email with validation and snackbar confirmation)
 - 📄 **Blank Page Template** - Ready-to-use page scaffold for new features
 ## Getting Started
 

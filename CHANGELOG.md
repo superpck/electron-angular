@@ -100,6 +100,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+#### Home Page
+- **Hero section** — animated badge, large gradient headline, descriptive subtitle, and three CTA buttons (Get Started → `/signup`, View Examples → `/examples`, View Demo)
+- **Tech stack chips** — Angular 21, Electron, Material 3, Tailwind 4, TypeScript displayed as `mat-chip` set
+- **Features grid** — four animated `mat-card` tiles (Lightning Fast, Beautiful UI, Cross Platform, Developer Friendly) with gradient icon, title, and description
+- **Inline Quick Signup form** — `ReactiveFormsModule` form with Full Name and Email fields (required / email validators), "Sign Up Free" submit button disabled when invalid, and `MatSnackBar` confirmation toast on success; "Already have an account? Sign in" link to `/login`
+- **Get Started Today section** — three benefit tiles (Instant Setup, Cloud Ready, 24/7 Support)
+
 #### Layout & Navigation
 - **Layout component** (`src/app/layout/`) — shared shell wrapping all authenticated pages
   - **Top navigation bar** (`mat-toolbar`) with logo and Sign In button
